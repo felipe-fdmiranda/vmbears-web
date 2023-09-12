@@ -1,0 +1,9 @@
+<div *ngIf="mostrarSplashScreen" id="splash-screen" class="splash-screen">
+  <img src="./assets/image/logo_vmbears_vertical.png" alt="VMBears logo"/>
+  <span style="font-size: 17px; margin-top: 10px;">Carregando ...</span>
+</div>
+
+<div *ngIf="!mostrarSplashScreen">
+  <router-outlet></router-outlet>
+</div>
+

@@ -1,0 +1,26 @@
+<div style="margin: 20px">
+  <div>
+    <h2>Leitor de Arquivos</h2>
+    <p>Insira o(s) arquivo(s) na seção abaixo para que nosso sistema possa analisar e processar o
+      conteúdo.</p>
+  </div>
+
+  <ngx-dropzone [disabled]="enviando" (change)="adicionarArquivos($event)" [expandable]="true" [disableClick]="enviando">
+    <ngx-dropzone-label>Clique aqui ou arraste e solte o arquivo.</ngx-dropzone-label>
+    <ngx-dropzone-preview style="background-image: linear-gradient(to top,#283371, #6877ca);"
+                          *ngFor="let f of files" [removable]="true" (removed)="removerArquivos(f)">
+      <ngx-dropzone-label style="width: 100%; color: white">
+        {{ f.name }} <br><br>
+        (<span data-dz-size>{{f.size | fileSize }}</span>)
+      </ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+
+  <div style="display: grid; justify-content: end; margin-top: 5px;">
+    <button *ngIf="!enviando" [disabled]="enviando" mat-raised-button color="primary" style="width: 10rem" (click)="enviarArquivos()">
+      <span>Enviar Arquivos</span>
+    </button>
+
+    <mat-spinner *ngIf="enviando" diameter="36"></mat-spinner>
+  </div>
+</div>
