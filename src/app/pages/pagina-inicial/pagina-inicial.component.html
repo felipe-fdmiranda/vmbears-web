@@ -5,8 +5,12 @@
       conteúdo.</p>
   </div>
 
-  <ngx-dropzone [disabled]="enviando" (change)="adicionarArquivos($event)" [expandable]="true" [disableClick]="enviando">
-    <ngx-dropzone-label>Clique aqui ou arraste e solte o arquivo.</ngx-dropzone-label>
+  <ngx-dropzone [disabled]="enviando" (change)="adicionarArquivos($event)" [expandable]="true"
+                [disableClick]="enviando">
+    <ngx-dropzone-label>
+      Clique aqui ou arraste e solte o arquivo.
+      <p style="font-size: 12px">(Tamanho máximo: 10MB)</p>
+    </ngx-dropzone-label>
     <ngx-dropzone-preview style="background-image: linear-gradient(to top,#283371, #6877ca);"
                           *ngFor="let f of files" [removable]="true" (removed)="removerArquivos(f)">
       <ngx-dropzone-label style="width: 100%; color: white">
@@ -17,7 +21,9 @@
   </ngx-dropzone>
 
   <div style="display: grid; justify-content: end; margin-top: 5px;">
-    <button *ngIf="!enviando" [disabled]="enviando" mat-raised-button color="primary" style="width: 10rem" (click)="enviarArquivos()">
+    <button *ngIf="!enviando" [disabled]="enviando" mat-raised-button
+            color="primary" style="width: 10rem"
+            (click)="enviarArquivos()">
       <span>Enviar Arquivos</span>
     </button>
 

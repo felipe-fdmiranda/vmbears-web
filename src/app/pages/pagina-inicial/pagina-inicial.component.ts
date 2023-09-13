@@ -25,23 +25,28 @@ export class PaginaInicialComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-
   enviarArquivos() {
     this.enviando = true;
     this.enviarProximoDaListaParaLeitura();
   }
 
   private enviarProximoDaListaParaLeitura() {
-    this.leitorService.lerXML(this.files[0]).subscribe((resposta) => {
-      if (0 == this.files.length - 1) {
+    this.leitorService.lerXML(this.files[0]).subscribe({
+      next: () => {
         this.removerArquivoLido();
-        console.log("Todos os arquivos foram processados com sucesso.")
+        if (this.files.length !== 0) {
+          this.enviarProximoDaListaParaLeitura();
+        }
+      },
+      error: (erro) => {
+        console.error(erro.error.message);
         this.enviando = false;
-      } else {
-        this.removerArquivoLido();
-        this.enviarProximoDaListaParaLeitura()
+      },
+      complete: () => {
+        console.log("Todos os arquivos foram processados com sucesso.");
+        this.enviando = false
       }
-    })
+    });
   }
 
   removerArquivoLido() {
