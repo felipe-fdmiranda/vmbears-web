@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LeitorService} from "../../shared/services/leitor.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {obterDocumentDoArquivoXml, removerDadoSigilosoDoXml} from "../../shared/util/file-util";
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -29,10 +30,20 @@ export class PaginaInicialComponent implements OnInit {
 
   enviarArquivos() {
     this.enviando = true;
-    this.enviarProximoDaListaParaLeitura();
+    this.removerDadosSigilosos().then(r => {
+      this.enviarProximoDaListaParaLeitura();
+    });
   }
 
-  private enviarProximoDaListaParaLeitura() {
+  async removerDadosSigilosos(){
+    for ( const [index, file] of this.files.entries()) {
+      let xmlDoc = await obterDocumentDoArquivoXml(file);
+      const blob = removerDadoSigilosoDoXml(xmlDoc, 'precoMedio');
+      this.files[index] = new File([blob], file.name, { type: 'application/xml' });
+    }
+  }
+
+  enviarProximoDaListaParaLeitura() {
     this.leitorService.lerXML(this.files[0]).subscribe({
       next: () => {
         this.removerArquivoLido();
