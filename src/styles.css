@@ -13,3 +13,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100vw;
   height: 100vh;
 }
+
+.erro-snackbar {
+  background-color: #F44336;
+  color: #fff;
+}
+
+.erro-snackbar .mat-button-wrapper {
+  color: #fff;
+}
+
+.success-snackbar {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.success-snackbar .mat-button-wrapper {
+  color: #fff;
+}

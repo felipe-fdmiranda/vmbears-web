@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PaginaInicialComponent} from './pages/pagina-inicial/pagina-inicial.component';
 import {SharedModule} from "./shared/shared.module";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {SharedModule} from "./shared/shared.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
